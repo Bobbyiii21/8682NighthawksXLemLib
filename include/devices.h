@@ -24,9 +24,10 @@ extern bool right_wing_toggle;
 extern bool rear_jack_toggle;
 extern bool intake_toggle;
 
-void ButtonY_Callback();
-void ButtonA_Callback();
-void ButtonB_Callback();
-void ButtonX_Callback();
-void ButtonUp_Callback();
+extern void ButtonY_Callback();
+extern void ButtonA_Callback();
+extern void ButtonB_Callback();
+extern void ButtonX_Callback();
+extern void ButtonUp_Callback();
 
+extern lemlib::Chassis chassis;

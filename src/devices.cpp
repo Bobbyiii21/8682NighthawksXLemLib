@@ -1,4 +1,5 @@
 #include "main.h"
+#include <cstddef>
 
 
 using namespace pros;
@@ -64,3 +65,77 @@ void ButtonUp_Callback() {
   right_wing.set_value(right_wing_toggle);
   left_wing.set_value(left_wing_toggle);
 }
+
+//LemLib configuaration
+///@todo #4 Measure the Robot
+
+lemlib::Drivetrain_t drivetrain {
+	// Left MotorGroup
+	&leftDrive,
+	// Right MotorGroup 
+	&rightDrive,
+	//Track Width
+	11,
+	//Wheel diameter
+	3.25,
+	//Wheel RPM
+	360
+};
+
+lemlib::TrackingWheel leftTracker{
+	&leftDrive,
+	3.25,
+	5.5,
+	360
+};
+
+lemlib::TrackingWheel rightTracker{
+	&rightDrive,
+	3.25,
+	5.5,
+	360
+};
+
+lemlib::ChassisController_t lateralController{
+	//Kp
+	50,
+	//Kd
+	20,
+	//Small Error
+	1,
+	//Small Error Timeout
+	100,
+	//Large Error
+	3,
+	//Large Error Timeout
+	500,
+	//Slew
+	20
+};
+
+lemlib::ChassisController_t angularController {
+	//Kp
+	10,
+	//Kd
+	30,
+	//Small Error
+	1,
+	//Small Error Timeout
+	100,
+	//Large Error
+	3,
+	//Large Error Timeout
+	500,
+	//Slew
+	20
+};
+
+lemlib::OdomSensors_t sensors{
+	&leftTracker,
+	&rightTracker,
+	nullptr,
+	nullptr,
+	&inertial
+};
+
+lemlib::Chassis chassis(drivetrain,lateralController,angularController,sensors);
