@@ -69,9 +69,9 @@ void ButtonUp_Callback() {
 //LemLib configuaration
 
 //Constants
-#define TRACK_WIDTH = 12.5
-#define WHEEL_DIAMETER = 3.25
-#define WHEEL_RPM = 360
+#define TRACK_WIDTH  12.5
+#define WHEEL_DIAMETER  3.25
+#define WHEEL_RPM  360
 
 lemlib::Drivetrain_t drivetrain {
 	// Left MotorGroup
