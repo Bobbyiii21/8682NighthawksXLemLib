@@ -67,7 +67,11 @@ void ButtonUp_Callback() {
 }
 
 //LemLib configuaration
-///@todo #4 Measure the Robot
+
+//Constants
+#define TRACK_WIDTH = 12.5
+#define WHEEL_DIAMETER = 3.25
+#define WHEEL_RPM = 360
 
 lemlib::Drivetrain_t drivetrain {
 	// Left MotorGroup
@@ -75,25 +79,25 @@ lemlib::Drivetrain_t drivetrain {
 	// Right MotorGroup 
 	&rightDrive,
 	//Track Width
-	11,
+	TRACK_WIDTH,
 	//Wheel diameter
-	3.25,
+	WHEEL_DIAMETER,
 	//Wheel RPM
-	360
+	WHEEL_RPM
 };
 
 lemlib::TrackingWheel leftTracker{
 	&leftDrive,
-	3.25,
-	5.5,
-	360
+	WHEEL_DIAMETER,
+	(TRACK_WIDTH/2),
+	WHEEL_RPM
 };
 
 lemlib::TrackingWheel rightTracker{
 	&rightDrive,
-	3.25,
-	5.5,
-	360
+	WHEEL_DIAMETER,
+	(TRACK_WIDTH/2),
+	WHEEL_RPM
 };
 
 lemlib::ChassisController_t lateralController{
