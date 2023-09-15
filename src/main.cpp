@@ -2,6 +2,10 @@
 #include "autoSelect/selection.h"
 #include "pros/misc.h"
 
+using selector::auton;
+
+int competitionSet = 0;
+
 /**
  * A callback function for LLEMU's center button.
  *
@@ -63,16 +67,26 @@ void competition_initialize() { selector::init(); }
  */
 void autonomous()
 {
-	if (selector::auton == 1) // Red Left
-		placeholder();
-	if (selector::auton == 2) // Red Right
-		placeholder();
-	if (selector::auton == -1) // Blue Left
-		placeholder();
-	if (selector::auton == -2) // Blue Right
-		placeholder();
-	if (selector::auton == 0) // Skills
-		auton_lemLibTest();
+	switch (auton)
+	{
+	case -2: // Blue Right
+		/* code */
+		break;
+	case -1: // Blue Left
+		/* code */
+		break;
+	case 0: // Skills
+		drive_test();
+		break;
+	case 1: // Red Left
+		/* code */
+		break;
+	case 2: // Red Right
+		auton_redRight();
+		break;
+	default:
+		break;
+	}
 }
 
 /**
@@ -126,22 +140,24 @@ void opcontrol()
 		if (master.get_digital_new_press(DIGITAL_UP))
 			ButtonUp_Callback();
 
-		int leftDriveSpeed = master.get_analog(ANALOG_LEFT_Y) + master.get_analog(ANALOG_LEFT_X);
-		int rightDriveSpeed = master.get_analog(ANALOG_LEFT_Y) - master.get_analog(ANALOG_LEFT_X);
+		// int leftDriveSpeed = master.get_analog(ANALOG_LEFT_Y) + master.get_analog(ANALOG_RIGHT_X);
+		// int rightDriveSpeed = master.get_analog(ANALOG_LEFT_Y) - master.get_analog(ANALOG_RIGHT_X);
 
-		int deadband = 5;
+		// int deadband = 5;
 
-		if (abs(leftDriveSpeed) < deadband)
-		{
-			leftDriveSpeed = 0;
-		}
-		if (abs(rightDriveSpeed) < deadband)
-		{
-			rightDriveSpeed = 0;
-		}
+		// if (abs(leftDriveSpeed) < deadband)
+		// {
+		// 	leftDriveSpeed = 0;
+		// }
+		// if (abs(rightDriveSpeed) < deadband)
+		// {
+		// 	rightDriveSpeed = 0;
+		// }
 
-		leftDrive.move(leftDriveSpeed);
-		rightDrive.move(rightDriveSpeed);
+		// leftDrive.move(leftDriveSpeed);
+		// rightDrive.move(rightDriveSpeed);
+
+		chassis.arcade(master.get_analog(ANALOG_LEFT_Y), master.get_analog(ANALOG_RIGHT_X));
 
 		// intake
 

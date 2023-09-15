@@ -19,7 +19,7 @@ Motor MiddleLeft = Motor(19, MOTOR_GEARSET_06, true);
 Motor BackLeft = Motor(20, MOTOR_GEARSET_06, true);
 Motor_Group leftDrive = Motor_Group({FrontLeft, MiddleLeft, BackLeft});
 Motor cataMotor = Motor(14, MOTOR_GEARSET_36, true);
-Motor intakeMotor = Motor(10, MOTOR_GEARSET_18, true);
+Motor intakeMotor = Motor(10, MOTOR_GEARSET_06, true);
 ADIDigitalOut intake_air('H');
 ADIDigitalOut rear_jack('G');
 ADIDigitalOut left_wing('F');
@@ -35,6 +35,30 @@ void wingValve(bool state) {
   left_wing.set_value(state);
   right_wing.set_value(state);
 }
+
+// motor functions
+void intake(bool state)
+{
+	if (state == true)
+	{
+		intakeMotor.move_velocity(400);
+	}
+	else
+	{
+		intakeMotor.move_velocity(0);
+	}
+}
+
+void intakeUntilObject()
+{
+	while (distance.get() > 100)
+	{
+		intakeMotor.move_velocity(400);
+		pros::delay(20);
+	}
+	intakeMotor.move_velocity(0);
+}
+
 
 // callback functions
 

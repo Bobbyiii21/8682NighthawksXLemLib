@@ -23,6 +23,11 @@ extern bool left_wing_toggle;
 extern bool right_wing_toggle;
 extern bool rear_jack_toggle;
 extern bool intake_toggle;
+extern void wingValve(bool state);
+extern void intake(bool state);
+extern void intakeUntilObject();
+
+
 
 extern void ButtonY_Callback();
 extern void ButtonA_Callback();
